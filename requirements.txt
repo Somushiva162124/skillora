@@ -37,7 +37,6 @@ Jinja2==3.1.6
 llvmlite==0.44.0
 lxml==5.3.2
 MarkupSafe==3.0.2
-mkl-service==2.4.0
 mkl_fft
 mkl_random
 more-itertools==10.6.0
