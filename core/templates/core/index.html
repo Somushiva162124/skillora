@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Learning Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f7fa, #e3e9f0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-section img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h1 {
+            font-size: 26px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .typing-text {
+            font-size: 22px;
+            color: #007bff;
+            font-weight: bold;
+            min-height: 30px;
+            margin-top: 10px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            width: 130px;
+            padding: 12px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #0056b3, #003d82);
+            box-shadow: 0px 0px 10px rgba(0, 91, 255, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <img src="{% static 'C:\Users\My Pc\OneDrive\Desktop\online_learning\core\static\images\WhatsApp Image 2025-03-28 at 16.59.04_e9bb6373.jpg' %}" alt="Platform Logo">
+        <h1>Welcome to Our Online Platform</h1>
+        <div class="typing-text" id="typing"></div>
+    </div>
+
+    <div class="container">
+        <p>Sign in or create an account to access courses on various topics and start learning today!</p>
+        <div class="buttons">
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'register' %}" class="btn">Register</a>
+        </div>
+    </div>
+
+    <script>
+        const text = "Explore, Learn, and Grow";
+        let index = 0;
+        function typeEffect() {
+            if (index < text.length) {
+                document.getElementById("typing").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 100);
+            }
+        }
+        window.onload = typeEffect;
+    </script>
+</body>
+</html>

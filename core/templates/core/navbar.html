@@ -1,0 +1,41 @@
+<style>
+    nav {
+        background: linear-gradient(to right, #007bff, #0056b3);
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 12px 12px;
+        font-family: Arial, sans-serif;
+    }
+
+    .nav-left h2 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .nav-right a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: opacity 0.3s;
+    }
+
+    .nav-right a:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<nav>
+    <div class="nav-left">
+        <h2>📘 Online Learning</h2>
+    </div>
+    <div class="nav-right">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'gamification' %}">Gamification</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</nav>

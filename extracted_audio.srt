@@ -1,0 +1,268 @@
+1
+00:00:00,000 --> 00:00:06,000
+Welcome back, aliens. My name is Nevin Reddy and finally, we are starting with a series on Python or Python.
+
+2
+00:00:06,000 --> 00:00:14,000
+It doesn't matter how you pronounce it. What matters is it is one of the fastest growing language in what terms in terms of number of developers
+
+3
+00:00:14,000 --> 00:00:23,000
+who are using it, in terms of the number of libraries we have, in terms of number of companies who are using it and in terms of the areas you can implement it.
+
+4
+00:00:23,000 --> 00:00:29,000
+You talk about machine learning, you talk about GUI, software development, web development, you can use it everywhere.
+
+5
+00:00:29,000 --> 00:00:33,000
+And that's why it is also called as a general purpose language.
+
+6
+00:00:33,000 --> 00:00:38,000
+So in this video, we are going to talk about what is Python and why it is so useful and why you should learn it.
+
+7
+00:00:38,000 --> 00:00:48,000
+So what is Python? As I mentioned, Python is a programming language, of course, but it is also an interpreted object-oriented and high-level language.
+
+8
+00:00:48,000 --> 00:00:54,000
+Now, does it mean you cannot do procedures here? You can. It also supports procedure-oriented programming as well as object-oriented.
+
+9
+00:00:54,000 --> 00:00:57,000
+It depends upon your purpose, right? You can use it the way you want.
+
+10
+00:00:57,000 --> 00:01:04,000
+But why Python is so famous? We have C, C++, Java, JavaScript and still Python is famous?
+
+11
+00:01:04,000 --> 00:01:08,000
+Now, some people say that Python is a new language and not exactly.
+
+12
+00:01:08,000 --> 00:01:16,000
+Java came into picture in 1995 and Python came in 1989. So it's way before Java, right?
+
+13
+00:01:16,000 --> 00:01:22,000
+Now, so when Java came into picture, the enterprise market, you know, everyone started using Java, but then Python was there.
+
+14
+00:01:22,000 --> 00:01:25,000
+You know, it was there for other people to use example.
+
+15
+00:01:25,000 --> 00:01:29,000
+Let's say if you want to learn a language for the first time, Python was there.
+
+16
+00:01:29,000 --> 00:01:36,000
+But now, since the advancement of machine learning AI, this is a field where we have research scientists.
+
+17
+00:01:36,000 --> 00:01:39,000
+They don't want to spend much time on learning programming language.
+
+18
+00:01:39,000 --> 00:01:45,000
+So what they do, they went for the easiest language available and the easiest language available in the market is Python.
+
+19
+00:01:45,000 --> 00:01:50,000
+And yes, Python is damn easy. It is much simpler than C, C++ and Java.
+
+20
+00:01:50,000 --> 00:01:54,000
+That's why most of the colleges and schools, they are teaching Python.
+
+21
+00:01:54,000 --> 00:01:57,000
+You might be thinking, which company uses Python?
+
+22
+00:01:57,000 --> 00:02:00,000
+Now, let's just list those small, small companies who uses Python.
+
+23
+00:02:00,000 --> 00:02:03,000
+We have Google, we have YouTube, we have Dropbox.
+
+24
+00:02:03,000 --> 00:02:10,000
+So we can see we have all these companies who are using Python as a main language or as a support language.
+
+25
+00:02:10,000 --> 00:02:13,000
+For example, let's say Google has so many features.
+
+26
+00:02:13,000 --> 00:02:16,000
+Some of those features is code in Python.
+
+27
+00:02:16,000 --> 00:02:19,000
+Now, in the same way, we have this one of the big website called Reddit.
+
+28
+00:02:19,000 --> 00:02:22,000
+Reddit is today written in Python.
+
+29
+00:02:22,000 --> 00:02:24,000
+Now, let's focus on this name Python.
+
+30
+00:02:24,000 --> 00:02:29,000
+In fact, when you talk about C, C++, Java, these names, they have some story, right?
+
+31
+00:02:29,000 --> 00:02:30,000
+What about Python?
+
+32
+00:02:30,000 --> 00:02:33,000
+It's just because this language looks like a snake.
+
+33
+00:02:33,000 --> 00:02:34,000
+Not exactly.
+
+34
+00:02:34,000 --> 00:02:41,000
+The author of Python, he's a big fan of a British comedy movie called as Monty Python's Flying Circus.
+
+35
+00:02:41,000 --> 00:02:44,000
+And that's why he went with the name called as Python initially.
+
+36
+00:02:44,000 --> 00:02:48,000
+And then when everyone liked it, he went for the same name.
+
+37
+00:02:48,000 --> 00:02:49,000
+Now, can they learn Python?
+
+38
+00:02:49,000 --> 00:02:50,000
+And the answer is yes.
+
+39
+00:02:50,000 --> 00:02:52,000
+It is one of the easiest languages to learn.
+
+40
+00:02:52,000 --> 00:02:58,000
+And even if you are from a non-technical background, you have not written any code, you can start with Python.
+
+41
+00:02:58,000 --> 00:03:03,000
+What if I say Python came into picture just to help those people who don't know how to write a code?
+
+42
+00:03:03,000 --> 00:03:05,000
+In fact, children can learn Python.
+
+43
+00:03:05,000 --> 00:03:06,000
+It's that easy.
+
+44
+00:03:06,000 --> 00:03:08,000
+Now, Python has multiple versions.
+
+45
+00:03:08,000 --> 00:03:11,000
+We have 1.x, we have 2.x, and we have 3.x.
+
+46
+00:03:11,000 --> 00:03:14,000
+And of course, we should be learning 3.x, right?
+
+47
+00:03:14,000 --> 00:03:16,000
+That means 2.x is not in the market.
+
+48
+00:03:16,000 --> 00:03:18,000
+And the answer is no.
+
+49
+00:03:18,000 --> 00:03:20,000
+The 2.x is still in the market.
+
+50
+00:03:20,000 --> 00:03:25,000
+Because when 3.x came into picture, it was very different from 2.x.
+
+51
+00:03:25,000 --> 00:03:29,000
+Normally what happens in programming language, you know, when Java 8 came into picture,
+
+52
+00:03:29,000 --> 00:03:32,000
+so it was backward compatible with Java 1.7.
+
+53
+00:03:32,000 --> 00:03:36,000
+When Java 1.7 came into picture, it was backward compatible with 1.6.
+
+54
+00:03:36,000 --> 00:03:38,000
+But that's not the case with Python.
+
+55
+00:03:38,000 --> 00:03:42,000
+You know, the two different versions has two different way of working.
+
+56
+00:03:42,000 --> 00:03:45,000
+And that's why we have 2.x still running in the market.
+
+57
+00:03:45,000 --> 00:03:48,000
+And it does have a support till 2020.
+
+58
+00:03:48,000 --> 00:03:49,000
+So which one you should learn?
+
+59
+00:03:49,000 --> 00:03:50,000
+Of course, 3.x, right?
+
+60
+00:03:50,000 --> 00:03:54,000
+Because it is new and there will be a lot of features which you can work on.
+
+61
+00:03:54,000 --> 00:03:56,000
+So that's the introduction from this video.
+
+62
+00:03:56,000 --> 00:04:01,000
+In the next video, we'll talk about how to install Python, how to work with different stuff.
+
+63
+00:04:01,000 --> 00:04:04,000
+And then the entire series, we will enjoy this language.
+
+64
+00:04:04,000 --> 00:04:06,000
+So I hope you will be watching this series.
+
+65
+00:04:06,000 --> 00:04:09,000
+Let me know in the comment section and do click the like button if you're enjoying it.
+
+66
+00:04:09,000 --> 00:04:10,000
+Thanks for watching, everyone.
+
+67
+00:04:10,000 --> 00:04:12,000
+Bye-bye.
+

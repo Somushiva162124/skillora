@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Add Item</title>
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add a New Item</h1>
+        <form method="POST">
+            <label for="item_name">Item Name:</label>
+            <input type="text" id="item_name" name="item_name" required>
+            <button type="submit" class="button">Add</button>
+        </form>
+        <a href="{{ url_for('home1') }}" class="button">Back</a>
+    </div>
+</body>
+</html>

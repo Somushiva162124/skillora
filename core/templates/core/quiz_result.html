@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f7fa, #e3e9f0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .feedback {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px rgba(0, 86, 179, 0.5);
+        }
+        .gamification-btn {
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎉 Quiz Completed!</h2>
+        <p class="score">You scored {{ score }} out of {{ total }} ({{ percentage }}%)</p>
+        <p class="feedback">{{ feedback }}</p>
+
+        <div class="btn-group">
+            <a href="{% url 'lesson_detail' course_id=course_id lesson_id=lesson_id %}" class="btn">Back to Lesson</a>
+            <a href="{% url 'quiz_view' course_id=course_id lesson_id=lesson_id %}" class="btn">Try Again</a>
+        </div>
+    </div>
+
+    <!-- 🎮 Button OUTSIDE the white box -->
+    <a href="{% url 'gamification' %}" class="btn gamification-btn">
+        🎮 View Gamification Progress
+    </a>
+</body>
+</html>

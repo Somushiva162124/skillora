@@ -1,0 +1,203 @@
+WEBVTT
+
+00:00.000 --> 00:06.000
+Welcome back, aliens. My name is Nevin Reddy and finally, we are starting with a series on Python or Python.
+
+00:06.000 --> 00:14.000
+It doesn't matter how you pronounce it. What matters is it is one of the fastest growing language in what terms in terms of number of developers
+
+00:14.000 --> 00:23.000
+who are using it, in terms of the number of libraries we have, in terms of number of companies who are using it and in terms of the areas you can implement it.
+
+00:23.000 --> 00:29.000
+You talk about machine learning, you talk about GUI, software development, web development, you can use it everywhere.
+
+00:29.000 --> 00:33.000
+And that's why it is also called as a general purpose language.
+
+00:33.000 --> 00:38.000
+So in this video, we are going to talk about what is Python and why it is so useful and why you should learn it.
+
+00:38.000 --> 00:48.000
+So what is Python? As I mentioned, Python is a programming language, of course, but it is also an interpreted object-oriented and high-level language.
+
+00:48.000 --> 00:54.000
+Now, does it mean you cannot do procedures here? You can. It also supports procedure-oriented programming as well as object-oriented.
+
+00:54.000 --> 00:57.000
+It depends upon your purpose, right? You can use it the way you want.
+
+00:57.000 --> 01:04.000
+But why Python is so famous? We have C, C++, Java, JavaScript and still Python is famous?
+
+01:04.000 --> 01:08.000
+Now, some people say that Python is a new language and not exactly.
+
+01:08.000 --> 01:16.000
+Java came into picture in 1995 and Python came in 1989. So it's way before Java, right?
+
+01:16.000 --> 01:22.000
+Now, so when Java came into picture, the enterprise market, you know, everyone started using Java, but then Python was there.
+
+01:22.000 --> 01:25.000
+You know, it was there for other people to use example.
+
+01:25.000 --> 01:29.000
+Let's say if you want to learn a language for the first time, Python was there.
+
+01:29.000 --> 01:36.000
+But now, since the advancement of machine learning AI, this is a field where we have research scientists.
+
+01:36.000 --> 01:39.000
+They don't want to spend much time on learning programming language.
+
+01:39.000 --> 01:45.000
+So what they do, they went for the easiest language available and the easiest language available in the market is Python.
+
+01:45.000 --> 01:50.000
+And yes, Python is damn easy. It is much simpler than C, C++ and Java.
+
+01:50.000 --> 01:54.000
+That's why most of the colleges and schools, they are teaching Python.
+
+01:54.000 --> 01:57.000
+You might be thinking, which company uses Python?
+
+01:57.000 --> 02:00.000
+Now, let's just list those small, small companies who uses Python.
+
+02:00.000 --> 02:03.000
+We have Google, we have YouTube, we have Dropbox.
+
+02:03.000 --> 02:10.000
+So we can see we have all these companies who are using Python as a main language or as a support language.
+
+02:10.000 --> 02:13.000
+For example, let's say Google has so many features.
+
+02:13.000 --> 02:16.000
+Some of those features is code in Python.
+
+02:16.000 --> 02:19.000
+Now, in the same way, we have this one of the big website called Reddit.
+
+02:19.000 --> 02:22.000
+Reddit is today written in Python.
+
+02:22.000 --> 02:24.000
+Now, let's focus on this name Python.
+
+02:24.000 --> 02:29.000
+In fact, when you talk about C, C++, Java, these names, they have some story, right?
+
+02:29.000 --> 02:30.000
+What about Python?
+
+02:30.000 --> 02:33.000
+It's just because this language looks like a snake.
+
+02:33.000 --> 02:34.000
+Not exactly.
+
+02:34.000 --> 02:41.000
+The author of Python, he's a big fan of a British comedy movie called as Monty Python's Flying Circus.
+
+02:41.000 --> 02:44.000
+And that's why he went with the name called as Python initially.
+
+02:44.000 --> 02:48.000
+And then when everyone liked it, he went for the same name.
+
+02:48.000 --> 02:49.000
+Now, can they learn Python?
+
+02:49.000 --> 02:50.000
+And the answer is yes.
+
+02:50.000 --> 02:52.000
+It is one of the easiest languages to learn.
+
+02:52.000 --> 02:58.000
+And even if you are from a non-technical background, you have not written any code, you can start with Python.
+
+02:58.000 --> 03:03.000
+What if I say Python came into picture just to help those people who don't know how to write a code?
+
+03:03.000 --> 03:05.000
+In fact, children can learn Python.
+
+03:05.000 --> 03:06.000
+It's that easy.
+
+03:06.000 --> 03:08.000
+Now, Python has multiple versions.
+
+03:08.000 --> 03:11.000
+We have 1.x, we have 2.x, and we have 3.x.
+
+03:11.000 --> 03:14.000
+And of course, we should be learning 3.x, right?
+
+03:14.000 --> 03:16.000
+That means 2.x is not in the market.
+
+03:16.000 --> 03:18.000
+And the answer is no.
+
+03:18.000 --> 03:20.000
+The 2.x is still in the market.
+
+03:20.000 --> 03:25.000
+Because when 3.x came into picture, it was very different from 2.x.
+
+03:25.000 --> 03:29.000
+Normally what happens in programming language, you know, when Java 8 came into picture,
+
+03:29.000 --> 03:32.000
+so it was backward compatible with Java 1.7.
+
+03:32.000 --> 03:36.000
+When Java 1.7 came into picture, it was backward compatible with 1.6.
+
+03:36.000 --> 03:38.000
+But that's not the case with Python.
+
+03:38.000 --> 03:42.000
+You know, the two different versions has two different way of working.
+
+03:42.000 --> 03:45.000
+And that's why we have 2.x still running in the market.
+
+03:45.000 --> 03:48.000
+And it does have a support till 2020.
+
+03:48.000 --> 03:49.000
+So which one you should learn?
+
+03:49.000 --> 03:50.000
+Of course, 3.x, right?
+
+03:50.000 --> 03:54.000
+Because it is new and there will be a lot of features which you can work on.
+
+03:54.000 --> 03:56.000
+So that's the introduction from this video.
+
+03:56.000 --> 04:01.000
+In the next video, we'll talk about how to install Python, how to work with different stuff.
+
+04:01.000 --> 04:04.000
+And then the entire series, we will enjoy this language.
+
+04:04.000 --> 04:06.000
+So I hope you will be watching this series.
+
+04:06.000 --> 04:09.000
+Let me know in the comment section and do click the like button if you're enjoying it.
+
+04:09.000 --> 04:10.000
+Thanks for watching, everyone.
+
+04:10.000 --> 04:12.000
+Bye-bye.
+

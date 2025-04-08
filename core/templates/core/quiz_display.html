@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz for {{ lesson.title }}</title>
+</head>
+<body>
+    <h1>Quiz for Lesson: {{ lesson.title }}</h1>
+    {% for question in questions %}
+        <div>
+            <p><strong>{{ question.question_text }}</strong></p>
+            <ul>
+                {% for choice in question.choices.all %}
+                    <li>{{ choice.option_text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <!-- Submit Quiz Button -->
+    <a href="{% url 'submit_quiz' quiz_id=quiz.id %}">Submit Quiz</a>
+</body>
+</html>

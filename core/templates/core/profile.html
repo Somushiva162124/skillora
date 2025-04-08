@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f4f7fa, #dfe9f3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            width: 95%;
+            max-width: 900px;
+            background-color: #ffffffcc;
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-info p {
+            font-size: 20px;
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .courses {
+            margin-top: 20px;
+        }
+
+        .courses h3 {
+            font-size: 22px;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        .courses ul {
+            margin-top: 15px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .courses li {
+            font-size: 18px;
+            background: #f0f8ff;
+            margin: 10px 0;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .back-link a {
+            padding: 12px 24px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .back-link a:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <h1>Welcome, {{ user.username }}!</h1>
+
+        <div class="profile-info">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Full Name:</strong> 
+                {% if user.first_name or user.last_name %}
+                    {{ user.first_name }} {{ user.last_name }}
+                {% else %}
+                    Not Provided
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="courses">
+            <h3>Your Enrolled Courses</h3>
+            {% if enrolled_courses %}
+                <ul>
+                    {% for course in enrolled_courses %}
+                        <li>{{ course.title }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You are not enrolled in any courses yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

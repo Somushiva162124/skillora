@@ -1,0 +1,68 @@
+start	end	text
+0	6000	Welcome back, aliens. My name is Nevin Reddy and finally, we are starting with a series on Python or Python.
+6000	14000	It doesn't matter how you pronounce it. What matters is it is one of the fastest growing language in what terms in terms of number of developers
+14000	23000	who are using it, in terms of the number of libraries we have, in terms of number of companies who are using it and in terms of the areas you can implement it.
+23000	29000	You talk about machine learning, you talk about GUI, software development, web development, you can use it everywhere.
+29000	33000	And that's why it is also called as a general purpose language.
+33000	38000	So in this video, we are going to talk about what is Python and why it is so useful and why you should learn it.
+38000	48000	So what is Python? As I mentioned, Python is a programming language, of course, but it is also an interpreted object-oriented and high-level language.
+48000	54000	Now, does it mean you cannot do procedures here? You can. It also supports procedure-oriented programming as well as object-oriented.
+54000	57000	It depends upon your purpose, right? You can use it the way you want.
+57000	64000	But why Python is so famous? We have C, C++, Java, JavaScript and still Python is famous?
+64000	68000	Now, some people say that Python is a new language and not exactly.
+68000	76000	Java came into picture in 1995 and Python came in 1989. So it's way before Java, right?
+76000	82000	Now, so when Java came into picture, the enterprise market, you know, everyone started using Java, but then Python was there.
+82000	85000	You know, it was there for other people to use example.
+85000	89000	Let's say if you want to learn a language for the first time, Python was there.
+89000	96000	But now, since the advancement of machine learning AI, this is a field where we have research scientists.
+96000	99000	They don't want to spend much time on learning programming language.
+99000	105000	So what they do, they went for the easiest language available and the easiest language available in the market is Python.
+105000	110000	And yes, Python is damn easy. It is much simpler than C, C++ and Java.
+110000	114000	That's why most of the colleges and schools, they are teaching Python.
+114000	117000	You might be thinking, which company uses Python?
+117000	120000	Now, let's just list those small, small companies who uses Python.
+120000	123000	We have Google, we have YouTube, we have Dropbox.
+123000	130000	So we can see we have all these companies who are using Python as a main language or as a support language.
+130000	133000	For example, let's say Google has so many features.
+133000	136000	Some of those features is code in Python.
+136000	139000	Now, in the same way, we have this one of the big website called Reddit.
+139000	142000	Reddit is today written in Python.
+142000	144000	Now, let's focus on this name Python.
+144000	149000	In fact, when you talk about C, C++, Java, these names, they have some story, right?
+149000	150000	What about Python?
+150000	153000	It's just because this language looks like a snake.
+153000	154000	Not exactly.
+154000	161000	The author of Python, he's a big fan of a British comedy movie called as Monty Python's Flying Circus.
+161000	164000	And that's why he went with the name called as Python initially.
+164000	168000	And then when everyone liked it, he went for the same name.
+168000	169000	Now, can they learn Python?
+169000	170000	And the answer is yes.
+170000	172000	It is one of the easiest languages to learn.
+172000	178000	And even if you are from a non-technical background, you have not written any code, you can start with Python.
+178000	183000	What if I say Python came into picture just to help those people who don't know how to write a code?
+183000	185000	In fact, children can learn Python.
+185000	186000	It's that easy.
+186000	188000	Now, Python has multiple versions.
+188000	191000	We have 1.x, we have 2.x, and we have 3.x.
+191000	194000	And of course, we should be learning 3.x, right?
+194000	196000	That means 2.x is not in the market.
+196000	198000	And the answer is no.
+198000	200000	The 2.x is still in the market.
+200000	205000	Because when 3.x came into picture, it was very different from 2.x.
+205000	209000	Normally what happens in programming language, you know, when Java 8 came into picture,
+209000	212000	so it was backward compatible with Java 1.7.
+212000	216000	When Java 1.7 came into picture, it was backward compatible with 1.6.
+216000	218000	But that's not the case with Python.
+218000	222000	You know, the two different versions has two different way of working.
+222000	225000	And that's why we have 2.x still running in the market.
+225000	228000	And it does have a support till 2020.
+228000	229000	So which one you should learn?
+229000	230000	Of course, 3.x, right?
+230000	234000	Because it is new and there will be a lot of features which you can work on.
+234000	236000	So that's the introduction from this video.
+236000	241000	In the next video, we'll talk about how to install Python, how to work with different stuff.
+241000	244000	And then the entire series, we will enjoy this language.
+244000	246000	So I hope you will be watching this series.
+246000	249000	Let me know in the comment section and do click the like button if you're enjoying it.
+249000	250000	Thanks for watching, everyone.
+250000	252000	Bye-bye.

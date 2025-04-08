@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>CRUD Application</title>
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Item List</h1>
+        <a href="{{ url_for('add') }}" class="button">Add Item</a>
+        <ul>
+            {% for item in items %}
+            <li>
+                {{ item.name }}
+                <a href="{{ url_for('edit', item_id=item.id) }}" class="button">Edit</a>
+                <form action="{{ url_for('delete', item_id=item.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="button danger">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

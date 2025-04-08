@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>{{ quiz.lesson.title }} - Quiz</h2>
+    
+    <!-- 🕒 Timer in the Top-Right Corner -->
+    <p id="timer" style="font-size: 18px; font-weight: bold; color: red;">
+        ⏳ Time Left: <span id="time-left"></span> seconds
+    </p>
+  </div>
+
+  {% if questions %}
+    <form method="POST" id="quiz-form">
+      {% csrf_token %}
+      
+      <h3>Questions</h3>
+      <ol>
+        {% for question in questions %}
+          <li>
+            <p><strong>{{ question.question_text }}</strong></p>
+            <ul>
+              {% for choice in question.choices.all %}
+                <li>
+                  <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}" id="question_{{ question.id }}_{{ forloop.counter }}">
+                  <label for="question_{{ question.id }}_{{ forloop.counter }}">{{ choice.option_text }}</label>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ol>
+
+      <button type="submit" id="submit-btn">Submit Quiz</button>
+    </form>
+  {% else %}
+    <p>No questions available for this quiz.</p>
+  {% endif %}
+
+  <a href="{% url 'lesson_detail' quiz.lesson.course.id quiz.lesson.id %}">Back to Lesson</a>
+
+  <script>
+    // Set timer (30 seconds per question)
+    let timeLimit = {{ questions.count }} * 30;
+    let timerElement = document.getElementById("time-left");
+    let submitBtn = document.getElementById("submit-btn");
+    let quizForm = document.getElementById("quiz-form");
+
+    function updateTimer() {
+      if (timeLimit <= 10) {
+        timerElement.style.color = "red"; // Change color to red as warning
+      }
+      
+      if (timeLimit <= 0) {
+        alert("⏳ Time's up! Submitting quiz automatically.");
+        submitQuiz(null);
+        return;
+      }
+      
+      timerElement.innerText = timeLimit;
+      timeLimit--;
+      setTimeout(updateTimer, 1000);
+    }
+
+    function submitQuiz(event) {
+      if (event) event.preventDefault();
+
+      const formData = new FormData(quizForm);
+      submitBtn.disabled = true;
+      
+      fetch("{% url 'submit_quiz' course_id=quiz.lesson.course.id lesson_id=quiz.lesson.id %}", {
+        method: "POST",
+        body: formData,
+        headers: { "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value }
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        submitBtn.disabled = false;
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("There was an error submitting the quiz. Please try again.");
+        submitBtn.disabled = false;
+      });
+    }
+
+    updateTimer(); // Start the countdown when page loads
+  </script>
+{% endblock %}

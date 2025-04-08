@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View PDF - {{ lesson.title }}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    iframe {
+      width: 80%;
+      height: 600px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(to right, #0056b3, #003d80);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>{{ lesson.title }} - PDF View</h1>
+
+  {% if lesson.pdf %}
+  <object data="{{ lesson.pdf.url }}" type="application/pdf" width="80%" height="600px">
+    </object>
+
+
+    <a class="download-btn" href="{{ lesson.pdf.url }}" download>
+      ⬇️ Download PDF
+    </a>
+  {% else %}
+    <p>No PDF available for this lesson.</p>
+  {% endif %}
+
+</body>
+</html>

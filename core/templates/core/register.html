@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f7fa, #e3e9f0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            color: #333;
+        }
+        .input-box {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-box label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px rgba(0, 86, 179, 0.5);
+        }
+        .login-link {
+            margin-top: 15px;
+            color: #333;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .success-message {
+            color: green;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+
+        {% if messages %}
+            <div class="error-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-box">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ request.POST.username }}" required>
+            </div>
+            <div class="input-box">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ request.POST.email }}" required>
+            </div>
+            <div class="input-box">
+                <label for="password1">Password:</label>
+                <input type="password" id="password1" name="password1" required>
+            </div>
+            <div class="input-box">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" id="password2" name="password2" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </div

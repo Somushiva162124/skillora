@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Quizzes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        strong {
+            color: green;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generated Quizzes for Lessons</h1>
+
+        {% if lessons %}
+            <ul>
+                {% for lesson in lessons %}
+                    <li>
+                        <strong>{{ lesson.title }}</strong><br>
+                        Quiz Status: <strong>Generated</strong><br>
+                        <a href="{% url 'quiz_page' lesson.id %}">Go to Quiz</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No lessons found or quizzes haven't been generated yet.</p>
+        {% endif %}
+
+        <p class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </p>
+    </div>
+</body>
+</html>

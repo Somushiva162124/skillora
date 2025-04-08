@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>About Page</title>
+</head>
+<body>
+    <h1>About Page</h1>
+    <p>This is the About page where you can learn more about our application.</p>
+
+    <!-- Next Button to manually navigate to the Contact page -->
+    <a href="{{ url_for('contact') }}">
+        <button>Next</button>
+    </a>
+
+    <script>
+        // Redirect to the Contact page after 2 seconds
+        setTimeout(function() 
+            window.location.href = "{{ url_for('contact') }}";
+        );  // Delay 2 seconds before redirecting
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }} - Enrollment Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            text-align: center;
+        }
+        .status-message {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .enrolled {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .not-enrolled {
+            background-color: #f44336;
+            color: white;
+        }
+        .progress-bar {
+            height: 20px;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            margin-top: 10px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            width: {{ progress }}%;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ course.title }} - Enrollment Status</h1>
+
+        {% if is_enrolled %}
+            <div class="status-message enrolled">
+                You are enrolled in this course!
+            </div>
+
+            <!-- Displaying Progress -->
+            <p>Progress: {{ progress }}%</p>
+            <div class="progress-bar">
+                <div class="progress-bar-fill"></div>
+            </div>
+        {% else %}
+            <div class="status-message not-enrolled">
+                You are not enrolled in this course. 
+                <a href="{% url 'enroll' course.id %}" class="back-link">Click here to enroll now!</a>
+            </div>
+        {% endif %}
+
+        <a href="{% url 'course_detail' course.id %}" class="back-link">Back to Course Details</a>
+    </div>
+</body>
+</html>

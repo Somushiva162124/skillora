@@ -1,0 +1,17 @@
+<!-- core/templates/core/course_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+</head>
+<body>
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    <p><strong>Instructor:</strong> {{ course.instructor.username }}</p>
+    <p><strong>Created At:</strong> {{ course.created_at }}</p>
+    
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
