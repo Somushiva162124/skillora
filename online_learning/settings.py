@@ -62,6 +62,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 DJANGO_ADMIN_INTERFACE = {
     'theme': 'dark',  # You can switch to 'light' or 'auto' if needed
 }
@@ -137,8 +139,8 @@ LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 # CSRF and Session Security (For local development, change to False if not using HTTPS)
-CSRF_COOKIE_SECURE = False  # Change to True in production
-SESSION_COOKIE_SECURE = False  # Change to True in production
+CSRF_COOKIE_SECURE = True  # Change to True in production
+SESSION_COOKIE_SECURE = True  # Change to True in production
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
