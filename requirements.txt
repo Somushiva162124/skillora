@@ -11,7 +11,7 @@ click==8.1.8
 colorama==0.4.6
 cryptography==44.0.2
 cssselect2==0.8.0
-decorator
+decorator==5.1.1
 defusedxml==0.7.1
 Django==5.1.7
 django-admin-interface==0.29.4
@@ -62,7 +62,7 @@ pydub==0.25.1
 pyHanko==0.26.0
 pyhanko-certvalidator==0.26.8
 pypdf==5.4.0
-PySocks @ file:///D:/bld/pysocks_1733217287171/work
+PySocks==1.7.1
 python-bidi==0.6.6
 python-dotenv==1.1.0
 python-slugify==8.0.4
