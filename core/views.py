@@ -14,7 +14,6 @@ from .models import Enrollment, Course, Lesson, Quiz, Question, UserQuizAttempt,
 from .forms import CustomUserCreationForm, TopicForm
 from .utils import convert_youtube_url, generate_quiz_questions, parse_quiz, save_quiz_to_db
 from .video_utils import process_video
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 from django.utils.timezone import now
 from .models import Choice
 from .utils import award_achievements
@@ -24,6 +23,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import moviepy.editor as mp
 
+from transformers import T5ForConditionalGeneration, T5Tokenizer
 model_name = "t5-small"  # You can use "t5-base" or "t5-large" for better performance, but requires more resources
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)  # Updated
@@ -236,8 +236,6 @@ def lesson_detail(request, course_id, lesson_id):
         'quiz': quiz,
         'course_id': course_id,
     })
-
-
 
 @login_required
 def mark_lesson_complete(request, course_id, lesson_id):

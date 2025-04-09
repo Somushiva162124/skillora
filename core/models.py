@@ -3,10 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from datetime import timedelta
 from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
-from django.core.exceptions import ValidationError
-import os
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from django.conf import settings
 
 # Custom User Model
@@ -15,6 +11,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 # Course Model
 class Course(models.Model):
@@ -32,13 +29,14 @@ class Course(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    instructor = models.ForeignKey(CustomUser, related_name='courses', on_delete=models.SET_NULL, null=True)
+    instructor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='courses', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.title
 
     def get_key_points(self):
         return [point.strip() for point in self.key_points.split(";") if point.strip()] if self.key_points else []
+
 
 # Lesson Model
 class Lesson(models.Model):
@@ -47,7 +45,7 @@ class Lesson(models.Model):
     content = CKEditor5Field()
     video_url = models.URLField(blank=True, null=True)
     video_file = models.FileField(upload_to='videos/', null=True, blank=True)
-    pdf = models.FileField(upload_to='pdfs/', null=True, blank=True)  # <-- Add this line
+    pdf = models.FileField(upload_to='pdfs/', null=True, blank=True)
     audio_transcription = models.TextField(blank=True, null=True)
     audio_file = models.FileField(upload_to="audio/", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
@@ -62,9 +60,9 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.course.title} - {self.title}"
-    
-User = get_user_model()
-    
+
+
+# User Profile (Gamification)
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='userprofile')
     xp = models.IntegerField(default=0)
@@ -77,22 +75,22 @@ class UserProfile(models.Model):
     def update_streak_and_xp(self):
         today = timezone.now().date()
         if self.last_active == today:
-            return  # Already logged today
+            return
         elif self.last_active == today - timedelta(days=1):
             self.streak += 1
         else:
-            self.streak = 1  # reset streak
-
+            self.streak = 1
         bonus_xp = 10 * self.streak
         self.xp += bonus_xp
         self.last_active = today
         self.save()
-        return bonus_xp  # optional return
+        return bonus_xp
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
-# Quiz Model
+
+# Quiz Models
 class Quiz(models.Model):
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -103,7 +101,7 @@ class Quiz(models.Model):
     def __str__(self):
         return f"Quiz for {self.lesson.title}"
 
-# Question Model
+
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, related_name='questions', on_delete=models.CASCADE)
     question_text = models.TextField()
@@ -113,7 +111,7 @@ class Question(models.Model):
     def __str__(self):
         return f"{self.quiz.lesson.title} - {self.question_text}"
 
-# Choice Model
+
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
     option_text = models.CharField(max_length=255)
@@ -123,6 +121,7 @@ class Choice(models.Model):
     def __str__(self):
         return self.option_text
 
+
 # Enrollment Model
 class Enrollment(models.Model):
     STATUS_CHOICES = [
@@ -130,7 +129,7 @@ class Enrollment(models.Model):
         ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
     ]
-    user = models.ForeignKey(CustomUser, related_name='enrollments', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enrollments', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, related_name='enrollments', on_delete=models.CASCADE)
     enrolled_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -155,9 +154,11 @@ class Enrollment(models.Model):
             if self.progress >= 100:
                 self.status = 'completed'
             self.save()
-            
+
+
+# User Progress Model
 class UserProgress(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_progress')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_progress')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='progress')
     completed_lessons = models.ManyToManyField(Lesson, blank=True)
     progress = models.FloatField(default=0.0)
@@ -177,14 +178,15 @@ class UserProgress(models.Model):
         return f"{self.user.username} - {self.course.title} progress"
 
 
+# Quiz Attempt Model
 class UserQuizAttempt(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    score = models.FloatField(null=True, blank=True)  # Ensure score is being calculated correctly
+    score = models.FloatField(null=True, blank=True)
     passed = models.BooleanField(default=False)
     attempt_date = models.DateTimeField(auto_now_add=True)
-    time_taken = models.DurationField(null=True, blank=True)  # Track the time taken for the quiz attempt
-    points_earned = models.IntegerField(default=0)  # For gamification purposes
+    time_taken = models.DurationField(null=True, blank=True)
+    points_earned = models.IntegerField(default=0)
 
     class Meta:
         constraints = [
@@ -194,19 +196,22 @@ class UserQuizAttempt(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.quiz.lesson.title} - Score: {self.score}% - Points: {self.points_earned}"
 
+
+# Achievement Models
 class Achievement(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    icon = models.ImageField(upload_to='achievement_icons/')  # Optional for icons
-    
+    icon = models.ImageField(upload_to='achievement_icons/')
+
     def formatted_name(self):
-        return self.name.replace("_", " ").title() 
+        return self.name.replace("_", " ").title()
 
     def __str__(self):
         return self.name
 
+
 class UserAchievement(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE)
     date_awarded = models.DateTimeField(auto_now_add=True)
 

@@ -1,28 +1,18 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Lesson, Quiz, Question, Choice, UserProfile
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 from django.core.files.base import ContentFile
 from io import BytesIO
 from xhtml2pdf import pisa
 from django.contrib.auth import get_user_model
-import torch
 import logging
 import re
 
 User = get_user_model()
-
-# Logger setup
 logger = logging.getLogger(__name__)
-
-# Load Transformer model once during startup
-model_name = "ramsrigouthamg/t5_squad_v1"
-tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
 
 
 def clean_html(raw_html):
-    """Remove HTML tags and decode special entities."""
     clean_text = re.sub(r'<.*?>', '', raw_html)
     clean_text = re.sub(r'&[a-z]+;', ' ', clean_text)
     return clean_text.strip()
@@ -30,9 +20,8 @@ def clean_html(raw_html):
 
 @receiver(post_save, sender=Lesson)
 def create_quiz_and_pdf_for_lesson(sender, instance, created, **kwargs):
-    """Automatically create a quiz and generate PDF when a new lesson is created."""
     if not created:
-        return  # Only on creation
+        return
 
     logger.info(f"Generating quiz and PDF for lesson: {instance.title}")
 
@@ -41,11 +30,18 @@ def create_quiz_and_pdf_for_lesson(sender, instance, created, **kwargs):
         logger.warning(f"Lesson '{instance.title}' has too little content. Skipping quiz and PDF generation.")
         return
 
-    # ---------- QUIZ GENERATION ----------
-    input_text = f"generate question: {cleaned_content}"
-    inputs = tokenizer(input_text, return_tensors="pt", max_length=512, truncation=True)
-
+    # ---------- LAZY IMPORT TRANSFORMERS ----------
     try:
+        import torch
+        from transformers import T5ForConditionalGeneration, T5Tokenizer
+
+        model_name = "t5-small"
+        tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)
+        model = T5ForConditionalGeneration.from_pretrained(model_name)
+
+        input_text = f"generate question: {cleaned_content}"
+        inputs = tokenizer(input_text, return_tensors="pt", max_length=512, truncation=True)
+
         with torch.no_grad():
             outputs = model.generate(inputs['input_ids'], max_length=64, num_beams=5, num_return_sequences=3, early_stopping=True)
 

@@ -14,8 +14,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback_default_key')  # Add a default fa
 # Debug mode (Turn off in production)
 DEBUG = False
 
-# Hosts allowed to access the app
-ALLOWED_HOSTS = ['*']  # For development, change for deployment
+ALLOWED_HOSTS = ['skillora.onrender.com', 'www.skillora.com']
+
+ # For development, change for deployment
 
 # Installed applications
 INSTALLED_APPS = [
