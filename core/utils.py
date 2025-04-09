@@ -4,6 +4,7 @@ from pydub import AudioSegment
 from .models import Question, Quiz, Choice
 import re
 from django.contrib import messages
+import moviepy.editor as mp
 
 # Load pre-trained T5 model and tokenizer for question generation
 model_name = "t5-small"
@@ -23,6 +24,7 @@ def convert_youtube_url(url):
         return f"https://www.youtube.com/embed/{video_id}"  # Embeddable URL format
     
     return None  # Invalid YouTube URL
+
 
 def extract_audio(video_path, output_audio_path="temp_audio.wav"):
     """Extracts audio from a video and converts it to WAV format."""
@@ -56,6 +58,35 @@ def generate_quiz_questions(lesson_content, num_questions=5):
             ]
         })
     return structured_questions
+
+from moviepy.editor import VideoFileClip
+import os
+
+def process_video(video_path):
+    """Extracts audio from video and calculates duration."""
+    try:
+        clip = VideoFileClip(video_path)
+        duration = clip.duration  # in seconds
+        audio_path = "audio/temp_audio.wav"
+
+        # Ensure audio directory exists
+        audio_dir = os.path.join(os.path.dirname(video_path), "audio")
+        os.makedirs(audio_dir, exist_ok=True)
+        full_audio_path = os.path.join(audio_dir, "temp_audio.wav")
+
+        # Extract and save audio
+        clip.audio.write_audiofile(full_audio_path)
+
+        # Return relative audio path and duration
+        relative_audio_path = os.path.relpath(full_audio_path, settings.MEDIA_ROOT)
+        return {
+            "audio_path": relative_audio_path.replace("\\", "/"),  # for Windows
+            "duration": duration
+        }
+    except Exception as e:
+        print(f"[ERROR] process_video failed: {e}")
+        return None
+
 
 def parse_quiz(quiz):
     """Parses quiz object into a structured dictionary format."""

@@ -20,6 +20,9 @@ from .models import Choice
 from .utils import award_achievements
 from datetime import datetime
 from .forms import LessonForm
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import moviepy.editor as mp
 
 model_name = "t5-small"  # You can use "t5-base" or "t5-large" for better performance, but requires more resources
 model = T5ForConditionalGeneration.from_pretrained(model_name)
@@ -52,20 +55,39 @@ def convert_youtube_url(video_url):
     # Not YouTube? Return as-is
     return video_url
 
-
-# Video Upload and Processing
+@csrf_exempt
 def process_uploaded_video(request):
-    """Handles video processing."""
+    """Handles video processing: save, extract audio, get duration, update lesson."""
     if request.method == "POST" and request.FILES.get("video"):
         video_file = request.FILES["video"]
+        lesson_id = request.POST.get("lesson_id")  # 🧠 Get lesson ID
+
         video_dir = os.path.join(settings.MEDIA_ROOT, "videos")
         os.makedirs(video_dir, exist_ok=True)
-        file_path = os.path.join(video_dir, video_file.name)
-        file_name = default_storage.save(file_path, ContentFile(video_file.read()))
-        output_video = process_video(os.path.join(settings.MEDIA_ROOT, file_name))
 
-        if output_video:
-            return JsonResponse({"message": "Video processed successfully", "output": output_video})
+        file_path = os.path.join(video_dir, video_file.name)
+        with open(file_path, 'wb+') as f:
+            for chunk in video_file.chunks():
+                f.write(chunk)
+
+        output = process_video(file_path)  # 🎬 Your custom logic
+
+        if output:
+            # ✅ Update Lesson model with audio path and duration
+            if lesson_id:
+                try:
+                    lesson = Lesson.objects.get(id=lesson_id)
+                    lesson.audio_file = output["audio_path"]
+                    lesson.duration = output["duration"]
+                    lesson.save()
+                except Lesson.DoesNotExist:
+                    return JsonResponse({"error": "Lesson not found"}, status=404)
+
+            return JsonResponse({
+                "message": "Video processed successfully",
+                "duration": output["duration"],
+                "audio_file": settings.MEDIA_URL + output["audio_path"]
+            })
         else:
             return JsonResponse({"error": "Video processing failed"}, status=500)
 

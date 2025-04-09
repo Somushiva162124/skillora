@@ -4,7 +4,6 @@ from datetime import timedelta
 from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
 from django.core.exceptions import ValidationError
-import moviepy.editor as mp
 import os
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
