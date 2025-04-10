@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback_default_key')  # Add a default fa
 # Debug mode (Turn off in production)
 DEBUG = False
 
-ALLOWED_HOSTS = ['skillora.onrender.com', 'www.skillora.com']
+ALLOWED_HOSTS = ['skillora.onrender.com', 'www.skillora.com', '127.0.0.1', 'localhost']
 
  # For development, change for deployment
 
@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
-    'ckeditor_uploader',  # CKEditor upload functionality
+    'ckeditor',
+ # CKEditor upload functionality
     'django_ckeditor_5',  # CKEditor 5
 ]
 
