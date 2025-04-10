@@ -1,8 +1,6 @@
 *.pyc
 __pycache__/
 env/
-*.sqlite3
-db.sqlite3
 /static/
 /media/
 /online/Lib/
