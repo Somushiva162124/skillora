@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback_default_key')  # Add a default fa
 # Debug mode (Turn off in production)
 DEBUG = False
 
-ALLOWED_HOSTS = ['skillora.onrender.com', 'www.skillora.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['skillora.onrender.com', 'www.skillora.com', 'skillora.vercel.app' '127.0.0.1', 'localhost']
 
  # For development, change for deployment
 
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
  # CKEditor upload functionality
     'django_ckeditor_5',  # CKEditor 5
+    'whitenoise.runserver_nostatic',  # Add Whitenoise here
 ]
 
 # Middleware settings
@@ -121,7 +122,7 @@ USE_TZ = True
 
 # Static Files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]  # Ensure this is correct
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'core', 'static')]  # Ensure this is correct
 
 # Collect Static Files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
