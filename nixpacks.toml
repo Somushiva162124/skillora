@@ -1,9 +1,0 @@
-[phases.setup]
-nixPkgs = [
-  "python311Full",
-  "gcc",
-  "libffi",
-  "libffi.dev",
-  "openssl.dev",
-  "pkg-config"
-]
