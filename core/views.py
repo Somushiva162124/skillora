@@ -40,17 +40,22 @@ def index(request):
     return render(request, 'core/index.html', {'courses': courses})
 
 def maintenance(request):
-    if settings.MAINTENANCE_MODE:  # This condition should check if maintenance mode is enabled
-        return HttpResponse(""" 
-        <html>
-          <head><title>Maintenance</title></head>
-          <body style="text-align:center; margin-top:100px;">
-            <h1>Hi there.</h1>
-            <p>We are working hard to build a brand new site to serve you better.</p>
-            <p>Thank you for your patience!</p>
-          </body>
-        </html>
-        """)
+    if settings.MAINTENANCE_MODE:  # Check if maintenance mode is enabled
+        return HttpResponse(
+            """
+            <html>
+              <head><title>Maintenance</title></head>
+              <body style="text-align:center; margin-top:100px;">
+                <h1>Hi there.</h1>
+                <p>We are working hard to build a brand new site to serve you better.</p>
+                <p>Thank you for your patience!</p>
+              </body>
+            </html>
+            """,
+            status=503,  # Properly placed here
+            headers={"Retry-After": "3600"}  # Optional: retry after 1 hour
+        )
+
     # Continue with the regular page render if not in maintenance mode
     courses = Course.objects.all()
     return render(request, 'core/index.html', {'courses': courses})
