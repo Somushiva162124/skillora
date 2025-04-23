@@ -1,0 +1,196 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f4f7fa, #e3e9f0);
+        margin: 0;
+        padding: 0;
+    }
+
+    .gamification-container {
+        max-width: 650px;
+        margin: 50px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .welcome-message {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .xp-section {
+        background: rgba(0, 123, 255, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: left;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+    .progress-container {
+        margin-top: 10px;
+    }
+
+    .progress {
+        height: 18px;
+        background-color: #e9ecef;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(to right, #007bff, #0056b3);
+        transition: width 0.5s ease;
+    }
+
+    .achievements-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .achievements-container {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .badge-card {
+        background: white;
+        border: 2px solid #007bff;
+        border-radius: 6px;
+        padding: 10px 16px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .badge-card:hover {
+        transform: scale(1.03);
+    }
+
+    .badge-icon {
+        font-size: 24px;
+    }
+
+    .badge-text {
+        text-decoration: none;  /* Removes underline */
+        font-weight: bold;       /* Makes text bold */
+        color: #2c3e50;         /* Dark color for readability */
+    }
+    
+    .btn-back {
+        margin-top: 20px;
+        padding: 10px 16px; /* Made the button smaller */
+        background: linear-gradient(to right, #007bff, #0056b3);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px; /* Reduced font size */
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-back:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+    }
+
+</style>
+
+<div class="gamification-container">
+    <h2>🎮 Gamification Zone</h2>
+
+    <p class="welcome-message">Welcome, <strong>{{ request.user.username }}</strong>!</p>
+
+    <div class="xp-section">
+        <p>🔥 Current Streak: <strong>{{ streak }}</strong> Days</p>
+        <p>🏆 Rank: <strong>{{ rank }}</strong></p>
+        <p><strong>Total XP:</strong> {{ xp }} 🎯</p>
+        <p><strong>Level:</strong> {{ level }}</p>
+
+        <div class="progress-container">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ progress }}%;">
+                    {{ progress }}%
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="achievements-title">🏅 Achievements & Badges</h3>
+<div class="achievements-container">
+    {% if badges %}
+        {% for badge in badges %}
+            <div class="badge-card">
+                {% if badge|lower == "xp_100" %}
+                    <div class="badge-icon">🎖️</div>
+                    <div class="badge-text">XP 100 Earned</div>
+                {% elif badge|lower == "xp_200" %}
+                    <div class="badge-icon">🥈</div>
+                    <div class="badge-text">XP 200 Earned</div>
+                {% elif badge|lower == "xp_300" %}
+                    <div class="badge-icon">🥇</div>
+                    <div class="badge-text">XP 300 Earned</div>
+                {% elif badge|lower == "xp_500" %}
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-text">XP 500 Earned</div>
+                {% elif badge|lower == "first_quiz_passed" %}
+                    <div class="badge-icon">📘</div>
+                    <div class="badge-text">First Quiz Passed</div>
+                {% elif badge|lower == "first_lesson_completed" %}
+                    <div class="badge-icon">📖</div>
+                    <div class="badge-text">First Lesson Completed</div>
+                {% elif badge|lower == "streak_7_days" %}
+                    <div class="badge-icon">🔥</div>
+                    <div class="badge-text">7-Day Streak</div>
+                {% else %}
+                    <div class="badge-icon">🏅</div>
+                    <div class="badge-text">{{ badge }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No badges yet. Complete lessons and pass quizzes to unlock achievements!</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'dashboard' %}" class="btn-back">Back to Dashboard</a>
+</div>
+
+{% endblock %}

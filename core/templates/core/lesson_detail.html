@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ lesson.title }}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f4f7fa, #e3e9f0);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #f0f8ff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      color: #333;
+      max-width: 95%;
+      margin: 20px auto 30px;
+    }
+
+    .container {
+      max-width: 95%;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    video, iframe {
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      height: 500px; /* Increased height */
+      min-height: 400px; /* Optional: ensures it's not too small */
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    
+
+    p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .pdf-download {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .pdf-download a {
+      display: inline-block;
+      background: linear-gradient(to right, #6c63ff, #5a54d1);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: background 0.3s ease;
+    }
+
+    .pdf-download a:hover {
+      background: linear-gradient(to right, #5a54d1, #3f3cae);
+    }
+
+    .quiz-button {
+      display: block;
+      width: fit-content;
+      padding: 10px 20px;
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      text-align: center;
+      text-decoration: none;
+      margin: 30px auto 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .quiz-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 10px rgba(0, 86, 179, 0.5);
+    }
+
+    .progress-bar {
+      width: 100%;
+      background: #ddd;
+      height: 10px;
+      border-radius: 8px;
+      margin: 30px 0 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      width: {{ progress_percentage }}%;
+      height: 100%;
+      background: #28a745;
+      border-radius: 8px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-weight: bold;
+      color: #28a745;
+      font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="lesson-title">{{ lesson.title }}</div>
+
+  <div class="container">
+    {% if lesson.video_file %}
+      <video controls>
+        <source src="{{ lesson.video_file.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elif converted_video_url %}
+      <iframe 
+        src="{{ converted_video_url }}" 
+        title="Lesson Video"
+        allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    {% endif %}
+
+    <p>{{ formatted_content }}</p>
+
+    <div class="pdf-download">
+      <a class="view-btn" href="{% url 'view_pdf' lesson_id=lesson.id %}">📖 View PDF Inline</a>
+
+      {% if lesson.pdf %}
+        <a class="download-btn" href="{{ lesson.pdf.url }}" download>📄 Download PDF</a>
+      {% else %}
+        <a class="download-btn" href="javascript:void(0);" style="opacity: 0.5; pointer-events: none;">📄 PDF Not Available</a>
+      {% endif %}
+    </div>
+
+    {% if progress_percentage %}
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="progress-text">{{ progress_percentage }}% Completed</div>
+    {% endif %}
+
+    <a class="quiz-button" href="{% url 'quiz_page' course_id=lesson.course.id lesson_id=lesson.id %}">
+      View Quiz
+    </a>
+  </div>
+</body>
+</html>

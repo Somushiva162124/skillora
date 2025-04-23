@@ -1,0 +1,317 @@
+WEBVTT
+
+00:00.000 --> 00:04.000
+Welcome back Aliens. My name is Devan Reddy and in this video we will talk about the Python
+
+00:04.000 --> 00:08.400
+installation. The thing is we have talked about the language which is very powerful
+
+00:08.400 --> 00:12.160
+but then where you will write your code. Of course we can simply open your
+
+00:13.040 --> 00:18.320
+notepad and we can write the code which we want. So example I can simply go back here
+
+00:18.320 --> 00:22.000
+and I can say okay what type of code I want to write. So it can be anything. It can be let's say
+
+00:22.000 --> 00:28.880
+2 plus 3. Now when you say you want to write a code it can be a calculation, a computation. So
+
+00:28.880 --> 00:35.280
+basically a normal calculation like adding two numbers or deciding in which stock to invest
+
+00:35.280 --> 00:41.040
+or maybe deciding who should be the next CEO. So basically the idea is if you want to write a code
+
+00:41.040 --> 00:46.080
+to design a software which can do some activities we have to write a code but where.
+
+00:46.080 --> 00:50.400
+If you write the code in the notepad of course you are not getting the output. Where do you
+
+00:50.400 --> 00:55.520
+will get the output for this? This is tricky right and that's why in your machine you need
+
+00:55.520 --> 01:00.320
+a python interpreter. So basically we have to install some software and in this machine I
+
+01:00.320 --> 01:05.200
+don't have it. How do I verify? It's very simple. You can open your command prompt. So if you're
+
+01:05.200 --> 01:09.920
+using Windows you can use command prompt to check it or if you're using Mac or Linux
+
+01:10.640 --> 01:15.840
+you can open the terminal. So I'm here on command prompt and here let me see if I have Python.
+
+01:15.840 --> 01:22.240
+Now basically the way you can check that is by saying Python version and if you get this type
+
+01:22.240 --> 01:27.680
+of error which says Python was not found that means in this machine I don't have Python. Okay
+
+01:27.680 --> 01:34.160
+with Python 3 you might also check if you do you have Python 3 installed and you can see
+
+01:34.160 --> 01:38.240
+nothing is there. So even if you have Python installed sometime it will not work with the
+
+01:38.240 --> 01:43.200
+Python command it might work for the Python 3 command. So do check both the versions and in
+
+01:43.200 --> 01:48.240
+this machine I don't have any. So how do you get it? So the first thing we need is Python interpreter
+
+01:48.240 --> 01:53.680
+and okay let's say we got python interpreter and then you can write a code there. The thing is
+
+01:53.680 --> 01:59.920
+in the interpreter it provides you an option of writing a code one line at a time. So of course
+
+01:59.920 --> 02:06.960
+you can add two numbers but what if you want to build a big project. Now it can be a scientific
+
+02:06.960 --> 02:12.640
+project or a AI project. Now that's what is booming nowadays. So if you want to build an AI project
+
+02:12.640 --> 02:18.480
+or a web application or a desktop application where you will do it for that you need a software
+
+02:18.480 --> 02:24.960
+where you can write the code test your code run your code debug your code and also deploy your
+
+02:24.960 --> 02:30.080
+code to the cloud where you will do it. Now that's why we have to use something called an IDE which
+
+02:30.080 --> 02:35.680
+stands for integrated development environment. Now for Python we have a lot of options. Now one
+
+02:35.680 --> 02:40.640
+is very famous which is your pie charm. Now this is from JetBrains again in this video I will show
+
+02:40.640 --> 02:47.280
+you how to install Python interpreter and the pie charm. So let's start with the interpreter.
+
+02:47.280 --> 02:52.800
+So what you will do is in fact in the updated version of Windows when you say Python enter
+
+02:52.800 --> 02:58.000
+it will open the Microsoft store but let's say if you don't have this configured that's fine.
+
+02:58.720 --> 03:03.680
+What you can do is you can just go to Google and search for Python download. So you can say this
+
+03:03.680 --> 03:08.480
+is the option you will get. So of course the first website says Python you can download it from here.
+
+03:08.480 --> 03:12.320
+Now in the upcoming videos you might see a different version of Python install and that's
+
+03:12.320 --> 03:16.960
+completely fine because in the version difference you will not find a lot of changes. So even those
+
+03:16.960 --> 03:23.120
+things those code will work here. Okay. So you can go for Python 3.12 which is the latest version I
+
+03:23.120 --> 03:29.200
+feel. So if I click on download so you can see we got download Python 3.12 so you can download
+
+03:29.200 --> 03:36.960
+this version 13 is into release so don't use starting at this point. We got 12 which is
+
+03:37.680 --> 03:43.840
+3.12. So we can click here and say download. Okay. So you can see it is downloading and
+
+03:43.840 --> 03:49.840
+downloading complete. I feel yeah that's done. Now depend upon which OS you have Windows Linux
+
+03:49.840 --> 03:54.560
+or Mac depend upon that you can choose from here. So you can say we have different options here
+
+03:55.280 --> 04:00.400
+and yeah so that's a thing. So let me click on this and install. So basically I don't have this
+
+04:00.400 --> 04:04.880
+install so I will just click here and now this will install the software. Okay. So you can see
+
+04:04.880 --> 04:09.520
+we have an option here which is install now or customize. I will go for simple installation
+
+04:09.520 --> 04:15.040
+but before doing that I also want to say add a python.exe to the path. Basically even if you
+
+04:15.040 --> 04:20.160
+have installed maybe whenever you open a different folder python may not be available there. So if you
+
+04:20.160 --> 04:26.400
+do this add a python.exe to your path you don't have to manually search for the installation.
+
+04:26.400 --> 04:32.000
+So you can click on this install now and it will take some time. Now if you skip that step of
+
+04:32.000 --> 04:37.280
+add to the path then you have to manually set the path but anyway when you do the add to path
+
+04:37.280 --> 04:42.160
+you don't have to do the next the other steps. So by the time it is getting installed what we can
+
+04:42.160 --> 04:48.640
+do is we can also get the pycharm downloads done. So I will search for pycharm now pycharm is from
+
+04:48.640 --> 04:54.000
+JetBrains which is a very famous company for the IDs and software tools. So it helps developers.
+
+04:54.000 --> 04:59.680
+Now basically we can also use VS code for python. You can also use anaconda or ideally which is the
+
+04:59.760 --> 05:05.520
+interpreter and yeah many more. So I will just click on this I will say download pycharm. The
+
+05:05.520 --> 05:11.440
+thing is when you download or when you get to the pycharm it's not actually free. Okay now that's
+
+05:11.440 --> 05:16.080
+a twist right. So we have two versions there one is a paid version one is a free version so I would
+
+05:16.080 --> 05:20.160
+encourage you to go for the free version but yes once you become a professional once you're
+
+05:20.160 --> 05:25.680
+working for a company then it makes sense to use the paid version. So this is the website and as
+
+05:25.680 --> 05:30.800
+I mentioned this is developed by JetBrains which is the website here it's also the company and we
+
+05:30.800 --> 05:36.000
+also have a community version. So if you want the community version you can scroll down and you can
+
+05:36.000 --> 05:42.160
+see we have two different versions professional and community. I will click on the community version
+
+05:42.160 --> 05:47.520
+if you go for the professional version you will get trial for one month. So you decide if you want
+
+05:47.520 --> 05:51.520
+to use it or not but I would encourage you to use the community version. So it's going to be
+
+05:51.520 --> 05:57.360
+downloaded let me go back to my python setup and looks like python setup is completed let me click
+
+05:57.360 --> 06:03.280
+on close. So setup is complete how do I verify again we have to go to command prompt now one
+
+06:03.280 --> 06:08.720
+thing to remember even if you have installed a python and if you directly do this it may not
+
+06:08.720 --> 06:15.520
+work so you have to reopen your command prompt. So now if I say cmd and let me try now python
+
+06:16.080 --> 06:20.480
+version and you can see we got python installed this time we are getting a version number we're
+
+06:20.480 --> 06:25.360
+not getting that error which was getting earlier. So yeah python is installed now how do I test it
+
+06:25.360 --> 06:30.080
+it's very simple you simply say python it will open the interpreter now this is where you can
+
+06:30.080 --> 06:35.040
+write a code of course doesn't look good right maybe you need a software where you will find in
+
+06:35.040 --> 06:39.840
+fact if you have learned some other languages you can write the code you can see the project you can
+
+06:39.840 --> 06:45.920
+run the code we'll see that in pycharm but here you can see we got the interpreter and here I can
+
+06:45.920 --> 06:51.280
+simply add those two numbers and it is working right so you can yeah you can do calculations
+
+06:51.280 --> 06:56.480
+computations whatever you can do in this prompt apart from this if you want to open python you
+
+06:56.480 --> 07:01.200
+can also search for python so you can see it will also give you an app so you can also use this one
+
+07:01.200 --> 07:06.480
+this is the ideally from python in fact ideally looks like something like this so this is the
+
+07:06.480 --> 07:12.160
+python interpreter you can also use ideally yeah I know wide theme a lot of people don't like it
+
+07:12.240 --> 07:17.760
+but for youtube videos you know it makes sense to have a light theme it looks good it also encourages
+
+07:17.760 --> 07:23.520
+you to learn more but anyway that's your choice if you want to use a white or black or dark especially
+
+07:23.520 --> 07:28.560
+for me I prefer to use dark theme when I'm coding and for videos I prefer white themes anyway that's
+
+07:28.560 --> 07:33.120
+a different debate so I can just use this I can also say two plus three here I'm not sure if the
+
+07:33.120 --> 07:39.520
+font is visible but that's not important if I say two plus three enter okay we got syntax error again
+
+07:39.520 --> 07:44.160
+I will say 2.3 I think I've entered something weird okay so you can see we got five there so yeah
+
+07:44.160 --> 07:49.040
+you can do this here you can do that here or in the command prompt which we have opened earlier
+
+07:49.040 --> 07:54.400
+but what about the pycharm so we got the pycharm installation done so you can see we got pycharm
+
+07:54.400 --> 07:59.280
+download complete I will click on that taking some time and if you can see yes okay now setup
+
+07:59.280 --> 08:04.880
+is very simple here you just have to say next next it will detect the python as well the setup
+
+08:04.880 --> 08:11.120
+I'll click on next install again we'll take some time okay looks like a bulky software
+
+08:11.120 --> 08:15.520
+they're doing a lot of extraction but that's a that's a thing with IDs you know they are bulky
+
+08:15.520 --> 08:19.200
+otherwise you can also use VS code if you want that's your personal choice everything which we
+
+08:19.200 --> 08:26.000
+are doing in pycharm or on the ideally it will also work on VS code okay setup complete and I can
+
+08:26.000 --> 08:33.520
+also say run here from here or I can simply click on finish let me open pycharm taking some time again
+
+08:33.680 --> 08:39.840
+okay I don't want to import these settings any import click on okay so basically I'm using pycharm
+
+08:39.840 --> 08:44.720
+on this machine for the first time so you will get some extra prompts okay so what you can do here
+
+08:44.720 --> 08:49.520
+is you can create a project you can name any project you can name anything you want I can click
+
+08:49.520 --> 08:57.200
+on create and voila you got your project here so this is how the pycharm looks like and that's
+
+08:57.200 --> 09:02.160
+your python code again don't get confused with the code here we'll understand this one step by step
+
+09:02.160 --> 09:07.040
+but this is yeah this is your python code here you can even run this if you want but it will take
+
+09:07.040 --> 09:11.600
+some time anyway we are going to see the pycharm how to use it later in the course so yeah that's
+
+09:11.600 --> 09:16.560
+it from this video where we have to set up for the python interpreter and pycharm so if you and if
+
+09:16.560 --> 09:20.320
+you are enjoying this series make sure that you hit that subscribe button and also hit the bell
+
+09:20.320 --> 09:32.160
+icon because that's how you will know when I upload the other videos on the platform
+

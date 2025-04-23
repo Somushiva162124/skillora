@@ -1,0 +1,105 @@
+Welcome back Aliens. My name is Devan Reddy and in this video we will talk about the Python
+installation. The thing is we have talked about the language which is very powerful
+but then where you will write your code. Of course we can simply open your
+notepad and we can write the code which we want. So example I can simply go back here
+and I can say okay what type of code I want to write. So it can be anything. It can be let's say
+2 plus 3. Now when you say you want to write a code it can be a calculation, a computation. So
+basically a normal calculation like adding two numbers or deciding in which stock to invest
+or maybe deciding who should be the next CEO. So basically the idea is if you want to write a code
+to design a software which can do some activities we have to write a code but where.
+If you write the code in the notepad of course you are not getting the output. Where do you
+will get the output for this? This is tricky right and that's why in your machine you need
+a python interpreter. So basically we have to install some software and in this machine I
+don't have it. How do I verify? It's very simple. You can open your command prompt. So if you're
+using Windows you can use command prompt to check it or if you're using Mac or Linux
+you can open the terminal. So I'm here on command prompt and here let me see if I have Python.
+Now basically the way you can check that is by saying Python version and if you get this type
+of error which says Python was not found that means in this machine I don't have Python. Okay
+with Python 3 you might also check if you do you have Python 3 installed and you can see
+nothing is there. So even if you have Python installed sometime it will not work with the
+Python command it might work for the Python 3 command. So do check both the versions and in
+this machine I don't have any. So how do you get it? So the first thing we need is Python interpreter
+and okay let's say we got python interpreter and then you can write a code there. The thing is
+in the interpreter it provides you an option of writing a code one line at a time. So of course
+you can add two numbers but what if you want to build a big project. Now it can be a scientific
+project or a AI project. Now that's what is booming nowadays. So if you want to build an AI project
+or a web application or a desktop application where you will do it for that you need a software
+where you can write the code test your code run your code debug your code and also deploy your
+code to the cloud where you will do it. Now that's why we have to use something called an IDE which
+stands for integrated development environment. Now for Python we have a lot of options. Now one
+is very famous which is your pie charm. Now this is from JetBrains again in this video I will show
+you how to install Python interpreter and the pie charm. So let's start with the interpreter.
+So what you will do is in fact in the updated version of Windows when you say Python enter
+it will open the Microsoft store but let's say if you don't have this configured that's fine.
+What you can do is you can just go to Google and search for Python download. So you can say this
+is the option you will get. So of course the first website says Python you can download it from here.
+Now in the upcoming videos you might see a different version of Python install and that's
+completely fine because in the version difference you will not find a lot of changes. So even those
+things those code will work here. Okay. So you can go for Python 3.12 which is the latest version I
+feel. So if I click on download so you can see we got download Python 3.12 so you can download
+this version 13 is into release so don't use starting at this point. We got 12 which is
+3.12. So we can click here and say download. Okay. So you can see it is downloading and
+downloading complete. I feel yeah that's done. Now depend upon which OS you have Windows Linux
+or Mac depend upon that you can choose from here. So you can say we have different options here
+and yeah so that's a thing. So let me click on this and install. So basically I don't have this
+install so I will just click here and now this will install the software. Okay. So you can see
+we have an option here which is install now or customize. I will go for simple installation
+but before doing that I also want to say add a python.exe to the path. Basically even if you
+have installed maybe whenever you open a different folder python may not be available there. So if you
+do this add a python.exe to your path you don't have to manually search for the installation.
+So you can click on this install now and it will take some time. Now if you skip that step of
+add to the path then you have to manually set the path but anyway when you do the add to path
+you don't have to do the next the other steps. So by the time it is getting installed what we can
+do is we can also get the pycharm downloads done. So I will search for pycharm now pycharm is from
+JetBrains which is a very famous company for the IDs and software tools. So it helps developers.
+Now basically we can also use VS code for python. You can also use anaconda or ideally which is the
+interpreter and yeah many more. So I will just click on this I will say download pycharm. The
+thing is when you download or when you get to the pycharm it's not actually free. Okay now that's
+a twist right. So we have two versions there one is a paid version one is a free version so I would
+encourage you to go for the free version but yes once you become a professional once you're
+working for a company then it makes sense to use the paid version. So this is the website and as
+I mentioned this is developed by JetBrains which is the website here it's also the company and we
+also have a community version. So if you want the community version you can scroll down and you can
+see we have two different versions professional and community. I will click on the community version
+if you go for the professional version you will get trial for one month. So you decide if you want
+to use it or not but I would encourage you to use the community version. So it's going to be
+downloaded let me go back to my python setup and looks like python setup is completed let me click
+on close. So setup is complete how do I verify again we have to go to command prompt now one
+thing to remember even if you have installed a python and if you directly do this it may not
+work so you have to reopen your command prompt. So now if I say cmd and let me try now python
+version and you can see we got python installed this time we are getting a version number we're
+not getting that error which was getting earlier. So yeah python is installed now how do I test it
+it's very simple you simply say python it will open the interpreter now this is where you can
+write a code of course doesn't look good right maybe you need a software where you will find in
+fact if you have learned some other languages you can write the code you can see the project you can
+run the code we'll see that in pycharm but here you can see we got the interpreter and here I can
+simply add those two numbers and it is working right so you can yeah you can do calculations
+computations whatever you can do in this prompt apart from this if you want to open python you
+can also search for python so you can see it will also give you an app so you can also use this one
+this is the ideally from python in fact ideally looks like something like this so this is the
+python interpreter you can also use ideally yeah I know wide theme a lot of people don't like it
+but for youtube videos you know it makes sense to have a light theme it looks good it also encourages
+you to learn more but anyway that's your choice if you want to use a white or black or dark especially
+for me I prefer to use dark theme when I'm coding and for videos I prefer white themes anyway that's
+a different debate so I can just use this I can also say two plus three here I'm not sure if the
+font is visible but that's not important if I say two plus three enter okay we got syntax error again
+I will say 2.3 I think I've entered something weird okay so you can see we got five there so yeah
+you can do this here you can do that here or in the command prompt which we have opened earlier
+but what about the pycharm so we got the pycharm installation done so you can see we got pycharm
+download complete I will click on that taking some time and if you can see yes okay now setup
+is very simple here you just have to say next next it will detect the python as well the setup
+I'll click on next install again we'll take some time okay looks like a bulky software
+they're doing a lot of extraction but that's a that's a thing with IDs you know they are bulky
+otherwise you can also use VS code if you want that's your personal choice everything which we
+are doing in pycharm or on the ideally it will also work on VS code okay setup complete and I can
+also say run here from here or I can simply click on finish let me open pycharm taking some time again
+okay I don't want to import these settings any import click on okay so basically I'm using pycharm
+on this machine for the first time so you will get some extra prompts okay so what you can do here
+is you can create a project you can name any project you can name anything you want I can click
+on create and voila you got your project here so this is how the pycharm looks like and that's
+your python code again don't get confused with the code here we'll understand this one step by step
+but this is yeah this is your python code here you can even run this if you want but it will take
+some time anyway we are going to see the pycharm how to use it later in the course so yeah that's
+it from this video where we have to set up for the python interpreter and pycharm so if you and if
+you are enjoying this series make sure that you hit that subscribe button and also hit the bell
+icon because that's how you will know when I upload the other videos on the platform

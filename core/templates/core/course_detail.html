@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }} - Course Details</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .course-info {
+            background: #eef5ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 123, 255, 0.1);
+        }
+        .course-info div {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .lesson-list {
+            list-style: none;
+            padding: 0;
+        }
+        .lesson-list li {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-list li:hover {
+            background: #d4edda;
+            transform: translateY(-3px);
+        }
+        .lesson-list a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .lesson-list a:hover {
+            text-decoration: underline;
+        }
+        .progress-bar-container {
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 20px;
+            border-radius: 25px;
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            transition: width 0.5s ease-in-out;
+        }
+        .progress-text {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .back-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .back-button a {
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .back-button a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ course.title }}</h1>
+        <div class="course-info">
+            <div>{{ course.description|safe }}</div>
+            <div><strong>Instructor:</strong> {{ course.instructor.username|default:"Unknown" }}</div>
+        </div>
+        
+        <h3>Course Progress</h3>
+        <div class="progress-bar-container">
+            <div class="progress-bar" style="width: {{ progress_percentage }}%"></div>
+        </div>
+        <div class="progress-text">{{ progress_percentage }}% Completed</div>
+        
+        <h2>Lessons</h2>
+        <ul class="lesson-list">
+            {% for lesson in lessons %}
+            <li>
+                <h3>
+                    <a href="{% url 'lesson_detail' course.id lesson.id %}">{{ forloop.counter }}. {{ lesson.title }}</a>
+                    {% if lesson.id in completed_lessons %}
+                        <span style="color: #28a745; font-weight: bold; font-size: 14px;">✅ Completed</span>
+                    {% endif %}
+                </h3>
+            </li>            
+            {% empty %}
+                <p>No lessons added yet.</p>
+            {% endfor %}
+        </ul>        
+        
+        <div class="back-button">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
