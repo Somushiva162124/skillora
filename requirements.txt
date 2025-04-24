@@ -21,6 +21,7 @@ future==1.0.0
 gunicorn==23.0.0
 html5lib==1.1
 huggingface-hub==0.30.2
+huggingface_hub[hf_xet]
 idna==3.10
 imageio==2.37.0
 imageio-ffmpeg==0.6.0
