@@ -13,8 +13,8 @@ import os
 import re
 from .models import Enrollment, Course, Lesson, Quiz, Question, UserQuizAttempt, UserProfile  # Removed UserProgress
 from .forms import CustomUserCreationForm, TopicForm
-from .utils import convert_youtube_url, generate_quiz_questions, parse_quiz, save_quiz_to_db
-from .video_utils import process_video
+from .utils import convert_youtube_url, parse_quiz, save_quiz_to_db
+from .utils import generate_quiz_questions, process_video
 from django.utils.timezone import now
 from .models import Choice
 from .utils import award_achievements
@@ -22,7 +22,6 @@ from datetime import datetime
 from .forms import LessonForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-import moviepy.editor as mp
 from django.http import HttpResponse
 
 

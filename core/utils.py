@@ -1,7 +1,7 @@
 import os
 import re
 import logging
-from moviepy.editor import VideoFileClip
+import ffmpeg
 from pydub import AudioSegment
 from django.conf import settings
 from django.contrib import messages
@@ -30,49 +30,40 @@ def convert_youtube_url(url):
 def extract_audio(video_path, output_audio_path="temp_audio.wav"):
     """Extracts audio from a video and converts it to WAV format."""
     try:
-        clip = VideoFileClip(video_path)
-        clip.audio.write_audiofile(output_audio_path)
-        audio = AudioSegment.from_file(output_audio_path)
-        audio.export(output_audio_path, format="wav")
+        # Use FFmpeg to extract audio
+        ffmpeg.input(video_path).output(output_audio_path).run()
         return output_audio_path
     except Exception as e:
         logger.error(f"[ERROR] extract_audio failed: {e}")
         return None
 
 
-def generate_quiz_questions(lesson_content, num_questions=5):
-    """Generates quiz questions using the T5 model."""
-    try:
-        input_text = "Generate questions from this text: " + lesson_content
-        inputs = tokenizer(input_text, return_tensors="pt", max_length=1024, truncation=True)
-        outputs = model.generate(inputs['input_ids'], max_length=200, num_beams=4, num_return_sequences=num_questions, early_stopping=True)
-        questions = [tokenizer.decode(output, skip_special_tokens=True) for output in outputs]
-        structured_questions = []
-        for question in questions:
-            structured_questions.append({
-                "text": question,
-                "choices": [
-                    {"text": "Correct Answer", "is_correct": True},
-                    {"text": "Incorrect Option 1", "is_correct": False},
-                    {"text": "Incorrect Option 2", "is_correct": False},
-                    {"text": "Incorrect Option 3", "is_correct": False}
-                ]
-            })
-        return structured_questions
-    except Exception as e:
-        logger.error(f"[ERROR] generate_quiz_questions failed: {e}")
+def generate_quiz_questions(video_path, num_questions=5):
+    """Full pipeline: Extract audio → Transcribe → Generate quiz → Save to DB."""
+    audio_path = extract_audio(video_path)
+    if not audio_path:
         return []
+
+    # Placeholder for future transcription system (e.g., Whisper)
+    raise NotImplementedError("Transcription system not integrated yet.")
+    # transcript = transcribe_audio(audio_path)  # future placeholder
+    # return generate_quiz_questions(transcript, num_questions)
 
 
 def process_video(video_path):
     """Extracts audio from video and calculates duration."""
     try:
-        clip = VideoFileClip(video_path)
-        duration = clip.duration
+        # Extract audio
         audio_dir = os.path.join(os.path.dirname(video_path), "audio")
         os.makedirs(audio_dir, exist_ok=True)
         full_audio_path = os.path.join(audio_dir, "temp_audio.wav")
-        clip.audio.write_audiofile(full_audio_path)
+        ffmpeg.input(video_path).output(full_audio_path).run()
+
+        # Get video duration
+        probe = ffmpeg.probe(video_path, v='error', select_streams='v:0', show_entries='stream=duration')
+        duration = float(probe['streams'][0]['duration'])
+
+        # Return audio path and duration
         relative_audio_path = os.path.relpath(full_audio_path, settings.MEDIA_ROOT)
         return {
             "audio_path": relative_audio_path.replace("\\", "/"),
@@ -81,6 +72,13 @@ def process_video(video_path):
     except Exception as e:
         logger.error(f"[ERROR] process_video failed: {e}")
         return None
+
+def resize_video(input_video, output_video, width=1280, height=720):
+    """Resize a video to the specified dimensions."""
+    try:
+        ffmpeg.input(input_video).output(output_video, vf=f'scale={width}:{height}').run()
+    except Exception as e:
+        logger.error(f"[ERROR] resize_video failed: {e}")
 
 
 def parse_quiz(quiz):
@@ -113,18 +111,6 @@ def save_quiz_to_db(lesson, questions_data):
                 Choice.objects.create(question=question, text=choice_data["text"], is_correct=choice_data["is_correct"])
     except Exception as e:
         logger.error(f"[ERROR] save_quiz_to_db failed: {e}")
-
-
-def generate_quiz_from_video(video_path, num_questions=5):
-    """Full pipeline: Extract audio → Transcribe → Generate quiz → Save to DB."""
-    audio_path = extract_audio(video_path)
-    if not audio_path:
-        return []
-
-    # Replace this placeholder when Whisper or transcription model is integrated
-    raise NotImplementedError("Transcription system not integrated yet.")
-    # transcript = transcribe_audio(audio_path)  # future placeholder
-    # return generate_quiz_questions(transcript, num_questions)
 
 
 def award_achievements(user_profile, source="", extra_xp=0, request=None):

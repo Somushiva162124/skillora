@@ -1,12 +1,10 @@
 import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
-import whisper
 from django.core.management.base import BaseCommand
 from core.models import Lesson, Quiz, Question, Choice
 import yt_dlp
 import os
 import warnings
-import ffmpeg
 from difflib import SequenceMatcher
 
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -19,7 +17,6 @@ class Command(BaseCommand):
         self.stdout.write("🔄 Loading models...")
         tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-large")
         model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-large")
-        whisper_model = whisper.load_model("small", device="cpu")
         self.stdout.write(self.style.SUCCESS("✅ Models loaded successfully!"))
 
         lessons = Lesson.objects.all()
@@ -29,21 +26,11 @@ class Command(BaseCommand):
 
             quiz, created = Quiz.objects.get_or_create(lesson=lesson)
 
-            # Step 1: Extract text from video/audio
+            # Step 1: Extract text from video
             if lesson.video_url:
                 self.stdout.write("🎥 Extracting text from video...")
-                video_text, has_audio, video_duration = self.extract_text_from_video(lesson.video_url, whisper_model)
+                video_text, video_duration = self.extract_text_from_video(lesson.video_url)
                 text += video_text
-
-                if has_audio:
-                    self.stdout.write("🎙 Extracting additional text from audio...")
-                    extracted_audio_text = self.extract_text_from_audio("temp_audio.wav", whisper_model)
-                    text += " " + extracted_audio_text
-
-                    # ✅ Save extracted audio transcription in the database
-                    lesson.audio_transcription = extracted_audio_text
-                    lesson.save()
-                    self.stdout.write(self.style.SUCCESS("✅ Audio transcription saved!"))
 
             # Step 2: Preprocess and clean text
             text = self.clean_text(text)
@@ -71,11 +58,10 @@ class Command(BaseCommand):
                     Choice.objects.create(question=question, option_text="Wrong Answer 2", is_correct=False)
                     Choice.objects.create(question=question, option_text="Wrong Answer 3", is_correct=False)
 
-            source = "video and audio" if lesson.video_url and has_audio else "video" if lesson.video_url else "audio"
-            self.stdout.write(self.style.SUCCESS(f"✅ Quiz updated for: {lesson.title} (Source: {source})"))
+            self.stdout.write(self.style.SUCCESS(f"✅ Quiz updated for: {lesson.title}"))
 
-    def extract_text_from_video(self, video_url, model):
-        """Download video, extract audio, and transcribe text"""
+    def extract_text_from_video(self, video_url):
+        """Download video and extract text from it"""
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': 'temp_video.%(ext)s',
@@ -87,43 +73,15 @@ class Command(BaseCommand):
             video_path = info['requested_downloads'][0]['filepath']
             video_duration = info.get("duration", 0)  # Video length in seconds
 
-        has_audio = self.check_audio_stream(video_path)
-        if has_audio:
-            self.stdout.write(self.style.SUCCESS("✅ Audio detected in video! Extracting..."))
-            self.extract_audio(video_path, "temp_audio.wav")
-            text = model.transcribe("temp_audio.wav")["text"]
-        else:
-            self.stdout.write(self.style.WARNING(f"⚠ No audio found in {video_url}. Skipping..."))
-            text = ""
-
+        # For now, we're assuming text extraction is manually done
+        text = self.simulate_video_text_extraction(video_path)
         os.remove(video_path)  # Cleanup
-        return text, has_audio, video_duration
+        return text, video_duration
 
-    def extract_audio(self, video_path, audio_path):
-        """Extract audio from video using FFmpeg"""
-        try:
-            ffmpeg.input(video_path).output(audio_path, format='wav', acodec='pcm_s16le', ar='16000').run(overwrite_output=True, quiet=True)
-        except ffmpeg.Error as e:
-            self.stdout.write(self.style.ERROR(f"❌ FFmpeg error: {e}"))
-
-    def extract_text_from_audio(self, audio_path, model):
-        """Extract text from an audio file"""
-        if not os.path.exists(audio_path):
-            self.stdout.write(self.style.ERROR(f"❌ Audio file {audio_path} not found!"))
-            return ""
-
-        self.stdout.write(f"🔍 Processing audio file: {audio_path}")
-        return model.transcribe(audio_path)["text"]
-
-    def check_audio_stream(self, file_path):
-        """Check if video contains an audio stream"""
-        try:
-            probe = ffmpeg.probe(file_path)
-            audio_streams = [stream for stream in probe.get("streams", []) if stream.get("codec_type") == "audio"]
-            return len(audio_streams) > 0  # True if audio exists
-        except ffmpeg.Error as e:
-            self.stdout.write(self.style.ERROR(f"❌ FFmpeg error: {e}"))
-            return False
+    def simulate_video_text_extraction(self, video_path):
+        """Simulate video text extraction"""
+        # This should be replaced with a method that extracts video subtitles or transcribes audio
+        return "This is a sample transcription of the video content."
 
     def calculate_question_count(self, duration):
         """Dynamically determine the number of questions based on video length"""
