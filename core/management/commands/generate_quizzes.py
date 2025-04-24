@@ -1,5 +1,5 @@
 import torch
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import T5Tokenizer, T5ForConditionalGeneration, pipeline
 from django.core.management.base import BaseCommand
 from core.models import Lesson, Quiz, Question, Choice
 import yt_dlp
@@ -9,14 +9,13 @@ from difflib import SequenceMatcher
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
-
 class Command(BaseCommand):
     help = "Generate quizzes for lessons using AI"
 
     def handle(self, *args, **kwargs):
         self.stdout.write("🔄 Loading models...")
-        tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-large")
-        model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-large")
+        tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-small")
+        model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-small")
         self.stdout.write(self.style.SUCCESS("✅ Models loaded successfully!"))
 
         lessons = Lesson.objects.all()
@@ -26,20 +25,26 @@ class Command(BaseCommand):
 
             quiz, created = Quiz.objects.get_or_create(lesson=lesson)
 
-            # Step 1: Extract text from video
+            # Step 1: Check if quiz already has questions, skip if present
+            existing_questions = Question.objects.filter(quiz=quiz)
+            if existing_questions.exists():
+                self.stdout.write(self.style.SUCCESS(f"✅ Quiz already exists for: {lesson.title}. Skipping..."))
+                continue  # Skip quiz generation if questions exist
+
+            # Step 2: Extract text from video (only if quiz questions need to be generated)
             if lesson.video_url:
                 self.stdout.write("🎥 Extracting text from video...")
                 video_text, video_duration = self.extract_text_from_video(lesson.video_url)
                 text += video_text
 
-            # Step 2: Preprocess and clean text
+            # Step 3: Preprocess and clean text
             text = self.clean_text(text)
 
             if not text.strip():
                 self.stdout.write(self.style.WARNING(f"⚠ No valid content for {lesson.title}. Skipping..."))
                 continue
 
-            # Step 3: Generate questions based on video length
+            # Step 4: Generate questions based on video length
             num_questions = self.calculate_question_count(video_duration)
             self.stdout.write(f"🔢 Generating {num_questions} questions...")
 
@@ -48,10 +53,10 @@ class Command(BaseCommand):
             for chunk in text_chunks:
                 questions += self.generate_questions(chunk, model, tokenizer, num_questions)
 
-            # Step 4: Add unique questions to the quiz
+            # Step 5: Add unique questions to the quiz
             for question_text in questions:
-                existing_questions = Question.objects.filter(quiz=quiz).values_list("question_text", flat=True)
-                if not any(self.is_similar(question_text, q) for q in existing_questions):
+                existing_questions_text = existing_questions.values_list("question_text", flat=True)
+                if not any(self.is_similar(question_text, q) for q in existing_questions_text):
                     question = Question.objects.create(quiz=quiz, question_text=question_text)
                     Choice.objects.create(question=question, option_text="Correct Answer", is_correct=True)
                     Choice.objects.create(question=question, option_text="Wrong Answer 1", is_correct=False)
@@ -73,15 +78,16 @@ class Command(BaseCommand):
             video_path = info['requested_downloads'][0]['filepath']
             video_duration = info.get("duration", 0)  # Video length in seconds
 
-        # For now, we're assuming text extraction is manually done
-        text = self.simulate_video_text_extraction(video_path)
+        # Transcribe audio
+        text = self.transcribe_audio_with_whisper(audio_path=video_path)
         os.remove(video_path)  # Cleanup
         return text, video_duration
 
-    def simulate_video_text_extraction(self, video_path):
-        """Simulate video text extraction"""
-        # This should be replaced with a method that extracts video subtitles or transcribes audio
-        return "This is a sample transcription of the video content."
+    def transcribe_audio_with_whisper(self, audio_path):
+        """Transcribe audio using Hugging Face Whisper model"""
+        pipe = pipeline(model="openai/whisper-tiny", device=0 if torch.cuda.is_available() else -1)
+        transcription = pipe(audio_path)["text"]
+        return transcription
 
     def calculate_question_count(self, duration):
         """Dynamically determine the number of questions based on video length"""
@@ -97,12 +103,22 @@ class Command(BaseCommand):
         input_text = f"Generate {num_questions} quiz questions: {text}"
         inputs = tokenizer(input_text, return_tensors="pt", max_length=512, truncation=True)
         with torch.no_grad():
-            outputs = model.generate(inputs['input_ids'], max_length=64, num_beams=5, num_return_sequences=num_questions, early_stopping=True)
+            outputs = model.generate(
+                inputs['input_ids'],
+                max_length=64,
+                num_beams=4,
+                num_return_sequences=num_questions,
+                early_stopping=True
+            )
         return [tokenizer.decode(output, skip_special_tokens=True).strip() for output in outputs]
 
     def clean_text(self, text):
         """Remove repetitive phrases or filler words."""
-        unwanted_phrases = ["Welcome back, aliens.", "My name is Naveen Reddy.", "Let's start with Python."]
+        unwanted_phrases = [
+            "Welcome back, aliens.",
+            "My name is Naveen Reddy.",
+            "Let's start with Python."
+        ]
         for phrase in unwanted_phrases:
             text = text.replace(phrase, "")
         return text.strip()

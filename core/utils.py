@@ -169,3 +169,26 @@ def get_rank(xp):
     elif xp >= 100:
         return "Novice"
     return "Beginner"
+
+def transcribe_audio_with_huggingface(binary_audio_data):
+    """Uses Hugging Face API to transcribe audio data (WAV)."""
+    import requests
+
+    token = os.getenv("HUGGINGFACE_API_TOKEN")
+    if not token:
+        logger.error("[ERROR] HUGGINGFACE_API_TOKEN not found in environment.")
+        return {"error": "Token missing"}
+
+    headers = {"Authorization": f"Bearer {token}"}
+
+    try:
+        response = requests.post(
+            "https://api-inference.huggingface.co/models/facebook/wav2vec2-base-960h",
+            headers=headers,
+            data=binary_audio_data
+        )
+        return response.json()
+    except Exception as e:
+        logger.error(f"[ERROR] Hugging Face API call failed: {e}")
+        return {"error": str(e)}
+
