@@ -16,7 +16,7 @@ DEBUG = False
 MAINTENANCE_MODE = os.getenv('MAINTENANCE_MODE', 'False') == 'True'  # 'True' will show maintenance page
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'skillora.onrender.com', 'www.skillora.com', 'skillora.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'skillora.onrender.com', 'www.skillora.com', 'web-production-0316.up.railway.app']
 
 
  # For development, change for deployment
