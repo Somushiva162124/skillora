@@ -84,6 +84,17 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://red-d050hlp5pdvs73ah0fn0:6379/1',  # Use your Redis URL here with the correct DB index (e.g., /1)
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -146,8 +157,11 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 # CSRF and Session Security (For local development, change to False if not using HTTPS)
 CSRF_COOKIE_SECURE = True  # Change to True in production
 SESSION_COOKIE_SECURE = True  # Change to True in production
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
 
 # Logging Configuration
 LOGGING = {

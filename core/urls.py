@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.decorators import login_required
+from core.views import test_cache
 
 urlpatterns = [
     # Authentication
@@ -36,4 +37,5 @@ urlpatterns = [
 
     # Bulk Quiz Generation
     path('generate_quizzes/', views.generate_quizzes_for_all_lessons, name='generate_quizzes'),
+    path('test-cache/', views.test_cache, name='test_cache'),
 ]

@@ -59,6 +59,14 @@ def maintenance(request):
     courses = Course.objects.all()
     return render(request, 'core/index.html', {'courses': courses})
 
+from django.core.cache import cache
+
+def test_cache(request):
+    cache.set('my_key', 'my_value', timeout=60)  # store for 60 seconds
+    value = cache.get('my_key')  # retrieve it
+    return HttpResponse(f"Cached value is: {value}")
+
+
 def convert_youtube_url(video_url):
     """Converts YouTube URLs into embed format. Leaves other URLs unchanged."""
     if not video_url:
@@ -478,6 +486,7 @@ def gamification_view(request):
         'badges': profile.badges,
         'streak': profile.streak,
         'rank': profile.rank,
+        'daily_bonus': profile.daily_bonus_claimed_today(),
     }
     return render(request, 'core/gamification.html', context)
 
