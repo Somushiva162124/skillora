@@ -55,6 +55,7 @@ sqlparse==0.5.3
 svglib==1.5.1
 sympy==1.13.3
 tinycss2==1.4.0
+transformers==4.51.3
 tqdm==4.67.1
 typing_extensions==4.13.2
 tzdata==2025.2
