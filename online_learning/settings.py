@@ -84,15 +84,6 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://red-d050hlp5pdvs73ah0fn0:6379/1',  # Use your Redis URL here with the correct DB index (e.g., /1)
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
-    }
-}
 
 
 # Password validation

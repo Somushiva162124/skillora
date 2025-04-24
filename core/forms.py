@@ -10,7 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Optional: Making 'bio' field optional if needed
+        # Making 'bio' field optional
         self.fields['bio'].required = False
 
 # Course Form
@@ -21,51 +21,45 @@ class CourseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Limit 'instructor' field choices to only users with staff/admin privileges
+        # Restrict 'instructor' field to only staff users
         self.fields['instructor'].queryset = CustomUser.objects.filter(is_staff=True)
-        if not self.fields['instructor'].queryset.exists():
-            # Optionally, display a message if no staff are available
+        if self.fields['instructor'].queryset.exists() == False:
             self.fields['instructor'].empty_label = "No instructors available"
 
-# Lesson Form
+# Lesson Form (single definition)
 class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['course', 'title', 'content', 'video_url', 'order', 'duration', 'thumbnail_image']
+        fields = ['course', 'title', 'content', 'video_url', 'order', 'duration', 'thumbnail_image', 'video_file', 'pdf']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Ensure the 'course' field is filled based on the current course being created/updated
-        self.fields['course'].queryset = Course.objects.all()
-
-        # Optionally, filter by instructor (if required)
-        if self.instance and self.instance.course:
-            self.fields['course'].queryset = Course.objects.filter(instructor=self.instance.course.instructor)
+        # Restrict 'course' field to only courses created by the current instructor (if applicable)
+        if hasattr(self, 'user') and self.user.is_staff:
+            self.fields['course'].queryset = Course.objects.filter(instructor=self.user)
+        else:
+            self.fields['course'].queryset = Course.objects.all()
 
 # Enrollment Form
 class EnrollmentForm(forms.ModelForm):
     class Meta:
         model = Enrollment
-        fields = ['course']  # User is auto-set in the view
+        fields = ['course']
         widgets = {
-            'course': forms.Select(attrs={'class': 'form-control'}),  # Improved styling for the select widget
+            'course': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Make sure the user can only enroll in available courses (e.g., 'active' courses)
-        self.fields['course'].queryset = Course.objects.filter(status='active')
+        # Limit the 'course' field to active courses
+        self.fields['course'].queryset = Course.objects.filter(status=True)
 
-        # Optional: Limit enrollment to active courses and courses where the user is not already enrolled
-        self.fields['course'].queryset = self.fields['course'].queryset.exclude(
-            enrollments__user=self.instance.user
-        )
+        if self.instance and self.instance.user:
+            # Exclude courses that the user is already enrolled in
+            self.fields['course'].queryset = self.fields['course'].queryset.exclude(
+                enrollments__user=self.instance.user
+            )
 
-# New Topic Form for Quiz Generation (If needed for quiz purposes)
+# Topic Form (for Quiz generation)
 class TopicForm(forms.Form):
     topic = forms.CharField(label='Enter Topic for Quiz', max_length=100)
-
-class LessonForm(forms.ModelForm):
-    class Meta:
-        model = Lesson
-        fields = ['course', 'title', 'content', 'video_url', 'video_file', 'duration', 'pdf']

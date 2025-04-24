@@ -30,13 +30,13 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     instructor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='courses', on_delete=models.SET_NULL, null=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
     def get_key_points(self):
         return [point.strip() for point in self.key_points.split(";") if point.strip()] if self.key_points else []
-
 
 # Lesson Model
 class Lesson(models.Model):
